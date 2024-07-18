@@ -934,7 +934,7 @@ Model::CascadiaSettings CascadiaSettings::LoadAll()
 try
 {
     FILETIME lastWriteTime{};
-    auto settingsString = til::io::read_file_as_utf8_string_if_exists(_settingsPath(), false, &lastWriteTime).value_or(std::string{});
+    auto settingsString = til::io::read_file_as_utf8_string_if_exists(_settingsPath(), false, &lastWriteTime);
     auto firstTimeSetup = settingsString.empty();
 
     // If it's the firstTimeSetup and a preview build, then try to
@@ -947,7 +947,7 @@ try
         {
             try
             {
-                settingsString = til::io::read_file_as_utf8_string_if_exists(_releaseSettingsPath()).value_or(std::string{});
+                settingsString = til::io::read_file_as_utf8_string_if_exists(_releaseSettingsPath());
                 releaseSettingExists = settingsString.empty() ? false : true;
             }
             catch (...)
